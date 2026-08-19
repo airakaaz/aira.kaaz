@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault();
                 closeMenu();
                 const targetEl = document.querySelector(targetId);
-                if (targetEl) targetEl.scrollIntoView({ behavior: "smooth" });
+                if (targetEl) scrollToAnchor(targetEl);
             }
         });
     });
@@ -43,13 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- Custom SVG Wink Easter Egg ---
+    const smileyButton = document.getElementById("smiley-button");
     const smileySvg = document.getElementById("smiley-svg");
-    if (smileySvg) {
-        smileySvg.addEventListener("click", () => {
+    if (smileyButton && smileySvg) {
+        const wink = () => {
             if (smileySvg.classList.contains("winking")) return;
             smileySvg.classList.add("winking");
             setTimeout(() => smileySvg.classList.remove("winking"), 700);
-        });
+        };
+        smileyButton.addEventListener("click", wink);
     }
 
     // --- Menu Dropdown Logic & Easter Egg ---
@@ -130,6 +132,25 @@ document.addEventListener("DOMContentLoaded", () => {
     initGallery();
 });
 
+function scrollToAnchor(targetEl) {
+    if (targetEl.id === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+    }
+
+    const heading = targetEl.querySelector(".section-header h2");
+    const target = heading || targetEl;
+    const rect = target.getBoundingClientRect();
+    const headerOffset = document.querySelector(".header")?.offsetHeight || 0;
+    const topOffset = Math.max(16, headerOffset + 16);
+    const targetTop = window.scrollY + rect.top - topOffset;
+
+    window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: "smooth",
+    });
+}
+
 function setupHeroVisualCompression() {
     const content = document.querySelector(".hero-content");
     if (
@@ -165,6 +186,7 @@ function setupHeroVisualCompression() {
 async function initGallery() {
     const carousel = document.querySelector(".carousel-container");
     const track = document.getElementById("carousel-track");
+    const fallback = document.getElementById("gallery-fallback");
     let imageFiles = [];
 
     // 1. Load Images dynamically
@@ -177,6 +199,8 @@ async function initGallery() {
             "Failed to load gallery.json, falling back to empty gallery.",
             e,
         );
+        track.hidden = true;
+        fallback.hidden = false;
         return;
     }
 
@@ -212,7 +236,8 @@ async function initGallery() {
     track.appendChild(clone2);
 
     // 2. Setup Infinite Scroll & Auto-Scroll
-    let isAutoScrolling = true;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let isAutoScrolling = !reduceMotion.matches;
     let inactivityTimer;
     let isDraggingClick = false;
 
@@ -261,7 +286,7 @@ async function initGallery() {
         clearTimeout(inactivityTimer);
         // Autoscroll slowly when inactive
         inactivityTimer = setTimeout(() => {
-            isAutoScrolling = true;
+            if (!reduceMotion.matches) isAutoScrolling = true;
         }, 2000);
     }
 
@@ -272,6 +297,10 @@ async function initGallery() {
         carousel.addEventListener(evt, startCarousel, { passive: true });
     });
     carousel.addEventListener("mouseenter", stopCarousel);
+    carousel.addEventListener("focusin", stopCarousel);
+    carousel.addEventListener("focusout", (e) => {
+        if (!carousel.contains(e.relatedTarget)) startCarousel();
+    });
 
     // 4. Drag scrolling logic
     let isDown = false,
@@ -303,7 +332,9 @@ async function initGallery() {
     // 5. Lightbox Logic
     const lightbox = document.getElementById("lightbox");
     const lbImg = document.getElementById("lightbox-img");
+    const lightboxClose = document.getElementById("lightbox-close");
     let currentImgIdx = 0;
+    let lastFocusedElement = null;
 
     document.querySelectorAll("#carousel-track .gallery-img").forEach((img) => {
         const activate = () => {
@@ -324,22 +355,23 @@ async function initGallery() {
     });
 
     function openLightbox(idx) {
+        lastFocusedElement = document.activeElement;
         currentImgIdx = idx;
         lbImg.src = `gallery/${encodeURIComponent(imageFiles[idx])}`;
         lbImg.alt = imageFiles[idx].replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
         lightbox.hidden = false;
         document.body.style.overflow = "hidden";
         preloadAdjacent(idx);
+        requestAnimationFrame(() => lightboxClose.focus());
     }
 
     function closeLb() {
         lightbox.hidden = true;
         document.body.style.overflow = "";
+        if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
     }
 
-    document
-        .getElementById("lightbox-close")
-        .addEventListener("click", closeLb);
+    lightboxClose.addEventListener("click", closeLb);
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) closeLb();
     });
@@ -366,6 +398,10 @@ async function initGallery() {
         if (e.key === "Escape") closeLb();
         if (e.key === "ArrowRight") navigateLb(1);
         if (e.key === "ArrowLeft") navigateLb(-1);
+        if (e.key === "Tab") {
+            e.preventDefault();
+            lightboxClose.focus();
+        }
     });
 
     let touchStartX = 0;

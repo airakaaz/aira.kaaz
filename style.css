@@ -36,6 +36,18 @@
     padding: 0;
 }
 
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 @media (prefers-reduced-motion: no-preference) {
     html {
         scroll-behavior: smooth;
@@ -128,7 +140,7 @@ a:focus-visible {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 0.3rem;
     display: flex;
     align-items: center;
     transition: opacity 0.2s ease;
@@ -261,6 +273,9 @@ a:focus-visible {
     position: sticky;
     top: 0;
     height: 100vh;
+    height: 100dvh;
+    z-index: 2;
+    pointer-events: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -299,10 +314,20 @@ a:focus-visible {
 }
 
 /* Better Wink SVG Integration */
-#smiley-svg {
+.smiley-button {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: var(--accent);
+    font: inherit;
+    display: inline-flex;
     vertical-align: -0.05em;
     cursor: pointer;
-    color: var(--accent);
+    pointer-events: auto;
+}
+#smiley-svg {
     width: 0.8em;
     height: 0.8em;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -325,6 +350,7 @@ a:focus-visible {
     position: relative;
     margin-top: 2rem;
     z-index: 10;
+    pointer-events: auto;
 }
 .btn {
     padding: 1rem 2rem;
@@ -373,6 +399,10 @@ a:focus-visible {
 .section-header a {
     color: var(--fg);
     display: flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
 }
 .section-header a:hover {
     color: var(--accent);
@@ -388,15 +418,19 @@ a:focus-visible {
 .kaz-who {
     padding-top: 30vh;
     padding-bottom: 12vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     margin-top: -100vh;
     position: relative;
     z-index: 1;
+    scroll-margin-top: 12vh;
 }
 
 /* Gallery */
 .gallery-section {
     padding-top: 0;
-    padding-bottom: 15vh;
+    padding-bottom: 0;
+    scroll-margin-top: 12vh;
 }
 .gallery-section > .section-container {
     padding-top: 0;
@@ -414,13 +448,23 @@ a:focus-visible {
 .carousel-container:active {
     cursor: grabbing;
 }
+.gallery-fallback {
+    padding: 4rem 5vw;
+    color: var(--text-sec);
+    text-align: center;
+}
+.gallery-fallback a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
 .carousel-container::-webkit-scrollbar {
     display: none;
 }
 .carousel-track {
     display: flex;
     width: max-content;
-    padding: 0.5rem 5vw 2rem;
+    padding: 0.5rem 5vw 0.5rem;
 }
 .gallery-group {
     display: flex;
@@ -485,6 +529,9 @@ a:focus-visible {
     font-size: 2.5rem;
     line-height: 1;
     cursor: pointer;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     z-index: 1001;
     transition: color 0.2s;
 }
@@ -495,9 +542,9 @@ a:focus-visible {
 /* Footer */
 .footer {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 2rem;
     color: var(--text-sec);
     font-size: 0.875rem;
     border-top: 1px solid var(--border);
-    margin-top: 5vh;
+    margin-top: 0;
 }

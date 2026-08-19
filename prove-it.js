@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 2000);
             }, 2500);
         } else {
-            proveItMsg.textContent = "nope.";
+            proveItMsg.textContent = "nope. try again.";
         }
     });
 });

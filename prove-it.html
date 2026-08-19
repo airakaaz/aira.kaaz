@@ -36,13 +36,14 @@
     <h1 class="huge-title">prove it</h1>
     
     <form id="prove-it-form">
-        <input type="password" id="passphrase" name="passphrase" placeholder="passphrase" aria-label="passphrase" autocomplete="off" autofocus>
-        <button type="submit" aria-label="Submit">
+        <label class="visually-hidden" for="passphrase">Passphrase</label>
+        <input type="password" id="passphrase" name="passphrase" placeholder="passphrase" autocomplete="off" autofocus>
+        <button type="submit" aria-label="Submit passphrase">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
     </form>
     
-    <div id="prove-it-message" class="message-box"></div>
+    <div id="prove-it-message" class="message-box" role="status" aria-live="polite" aria-atomic="true"></div>
     
     <a href="index.html" class="nvm-btn">nvm</a>
 

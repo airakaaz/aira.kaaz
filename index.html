@@ -120,21 +120,24 @@
             <!-- Hero Section -->
             <section class="hero">
                 <div class="hero-content">
-                <div class="hero-title-container" aria-label="AIRAKAAZ :)">
+                <h1 class="visually-hidden">airakaaz</h1>
+                <div class="hero-title-container">
                 <div class="hero-line1-wrapper" aria-hidden="true">
                     <div class="hero-line1">
                         AIRAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     </div>
                 </div>
-                <div class="hero-line2-wrapper" aria-hidden="true">
+                <div class="hero-line2-wrapper">
                     <div class="hero-line2">
-                        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ
+                        <span aria-hidden="true">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ</span>
                         <!-- The Better Wink -->
-                        <svg id="smiley-svg" viewBox="0 0 100 100">
+                        <button id="smiley-button" class="smiley-button" type="button" aria-label="Make Kaz wink">
+                            <svg id="smiley-svg" viewBox="0 0 100 100" aria-hidden="true">
                             <circle class="eye-top" cx="30" cy="30" r="10" fill="currentColor" />
                             <circle class="eye-bot" cx="30" cy="70" r="10" fill="currentColor" />
                             <path d="M 65 15 Q 95 50 65 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none" />
-                        </svg>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -165,7 +168,7 @@
 
             <!-- Gallery Section -->
             <section id="gallery" class="gallery-section">
-                <div class="section-container" style="padding-bottom: 2rem">
+                <div class="section-container" style="padding-bottom: 0">
                     <div class="section-header">
                         <h2>i shot these btw</h2>
                         <a href="https://instagram.com/kizo_aria" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -176,11 +179,17 @@
                     </div>
                 </div>
 
-                <div class="carousel-container" aria-label="Gallery Carousel" tabindex="0">
+                <div class="carousel-container" role="region" aria-roledescription="carousel" aria-label="Gallery" tabindex="0">
+                    <p id="gallery-fallback" class="gallery-fallback" role="status" hidden>
+                        this isn't loading for some reason, check my
+                        <a href="https://instagram.com/kizo_aria" target="_blank" rel="noopener noreferrer">instagram</a>
+                        instead :)
+                    </p>
                     <div class="carousel-track" id="carousel-track">
                         <!-- Populated dynamically via JS -->
                     </div>
                 </div>
+
             </section>
 
             <footer class="footer">
@@ -189,8 +198,9 @@
         </main>
 
         <!-- LIGHTBOX -->
-        <div id="lightbox" class="lightbox" hidden>
-            <button id="lightbox-close" aria-label="Close">
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1" hidden>
+            <h2 id="lightbox-title" class="visually-hidden">Gallery image viewer</h2>
+            <button id="lightbox-close" type="button" aria-label="Close image viewer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
