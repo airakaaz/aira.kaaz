@@ -191,7 +191,7 @@ async function initGallery() {
 
     // 1. Load Images dynamically
     try {
-        const response = await fetch("gallery/gallery.json");
+        const response = await fetch("../assets/gallery/gallery.json");
         if (!response.ok) throw new Error("Network response was not ok");
         imageFiles = await response.json();
     } catch (e) {
@@ -214,7 +214,7 @@ async function initGallery() {
         const img = document.createElement("img");
         img.className = "gallery-img";
         img.dataset.file = file;
-        img.src = `gallery/${encodeURIComponent(file)}`;
+        img.src = `../assets/gallery/${encodeURIComponent(file)}`;
         img.alt = file.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
         img.loading = "lazy";
         img.tabIndex = 0;
@@ -357,7 +357,7 @@ async function initGallery() {
     function openLightbox(idx) {
         lastFocusedElement = document.activeElement;
         currentImgIdx = idx;
-        lbImg.src = `gallery/${encodeURIComponent(imageFiles[idx])}`;
+        lbImg.src = `../assets/gallery/${encodeURIComponent(imageFiles[idx])}`;
         lbImg.alt = imageFiles[idx].replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
         lightbox.hidden = false;
         document.body.style.overflow = "hidden";
@@ -379,7 +379,7 @@ async function initGallery() {
     function navigateLb(dir) {
         currentImgIdx =
             (currentImgIdx + dir + imageFiles.length) % imageFiles.length;
-        lbImg.src = `gallery/${encodeURIComponent(imageFiles[currentImgIdx])}`;
+        lbImg.src = `../assets/gallery/${encodeURIComponent(imageFiles[currentImgIdx])}`;
         lbImg.alt = imageFiles[currentImgIdx]
             .replace(/\.[^.]+$/, "")
             .replace(/[_-]+/g, " ");
@@ -389,8 +389,8 @@ async function initGallery() {
     function preloadAdjacent(idx) {
         const prev = (idx - 1 + imageFiles.length) % imageFiles.length;
         const next = (idx + 1) % imageFiles.length;
-        new Image().src = `gallery/${encodeURIComponent(imageFiles[prev])}`;
-        new Image().src = `gallery/${encodeURIComponent(imageFiles[next])}`;
+        new Image().src = `../assets/gallery/${encodeURIComponent(imageFiles[prev])}`;
+        new Image().src = `../assets/gallery/${encodeURIComponent(imageFiles[next])}`;
     }
 
     document.addEventListener("keydown", (e) => {
