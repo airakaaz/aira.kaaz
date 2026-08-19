@@ -12,7 +12,7 @@
 
     /* Typography */
     --font-ui: "Roboto Mono", monospace;
-    --font-deco: "Doto", monospace;
+    --font-deco: "Bungee", sans-serif;
     --font-heavy: "Archivo Black", sans-serif;
 }
 
@@ -238,21 +238,32 @@ a:focus-visible {
     margin: 0.5rem;
 }
 .menu-egg {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem 1.75rem;
     text-align: center;
     font-family: var(--font-deco);
-    font-size: 1.1rem;
-    color: var(--fg);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background: var(--accent);
+    border-radius: 4px;
+    transform: rotate(-2deg);
+    box-shadow: 4px 4px 0 var(--fg);
 }
 
 /* Hero */
 .hero {
+    height: 200vh;
+    position: relative;
+    padding-top: 0;
+}
+.hero-content {
+    position: sticky;
+    top: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-    padding-top: 10vh;
 }
 
 .hero-title-container {
@@ -311,8 +322,8 @@ a:focus-visible {
     display: flex;
     gap: 1.5rem;
     justify-content: center;
-    margin-top: 2rem;
     position: relative;
+    margin-top: 2rem;
     z-index: 10;
 }
 .btn {
@@ -325,9 +336,19 @@ a:focus-visible {
     color: var(--fg);
     transition: all 0.2s ease;
 }
+.btn:first-child {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
+}
 .btn:hover {
     border-color: var(--accent);
     color: var(--accent);
+}
+.btn:first-child:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
 }
 
 /* Sections */
@@ -364,11 +385,24 @@ a:focus-visible {
     margin-bottom: 2rem;
     color: var(--text-sec);
 }
+.kaz-who {
+    padding-top: 30vh;
+    padding-bottom: 12vh;
+    margin-top: -100vh;
+    position: relative;
+    z-index: 1;
+}
 
 /* Gallery */
 .gallery-section {
-    padding-top: 10vh;
+    padding-top: 0;
     padding-bottom: 15vh;
+}
+.gallery-section > .section-container {
+    padding-top: 0;
+}
+.gallery-section .section-header {
+    margin-bottom: 1.5rem;
 }
 .carousel-container {
     width: 100vw;
@@ -386,7 +420,7 @@ a:focus-visible {
 .carousel-track {
     display: flex;
     width: max-content;
-    padding: 2rem 5vw;
+    padding: 0.5rem 5vw 2rem;
 }
 .gallery-group {
     display: flex;

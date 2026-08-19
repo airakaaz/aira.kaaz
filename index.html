@@ -13,7 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Doto:wght@400;700&family=Roboto+Mono:wght@400;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bungee&family=Roboto+Mono:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
 
@@ -80,13 +80,15 @@
                             contact kaz
                         </a>
                         <hr class="menu-divider" />
-                        <a href="#top" class="menu-item nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="19" x2="12" y2="5"></line>
-                                <polyline points="5,12 12,5 19,12"></polyline>
-                            </svg>
-                            back to top
-                        </a>
+                        <div id="back-to-top-item" hidden>
+                            <a href="#top" class="menu-item nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="19" x2="12" y2="5"></line>
+                                    <polyline points="5,12 12,5 19,12"></polyline>
+                                </svg>
+                                back to top
+                            </a>
+                        </div>
                         <a href="#kaz-who" class="menu-item nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -117,28 +119,30 @@
         <main>
             <!-- Hero Section -->
             <section class="hero">
+                <div class="hero-content">
                 <div class="hero-title-container" aria-label="AIRAKAAZ :)">
-                    <div class="hero-line1-wrapper" aria-hidden="true">
-                        <div class="hero-line1">
-                            AIRAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                        </div>
-                    </div>
-                    <div class="hero-line2-wrapper" aria-hidden="true">
-                        <div class="hero-line2">
-                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ
-                            <!-- The Better Wink -->
-                            <svg id="smiley-svg" viewBox="0 0 100 100">
-                                <circle class="eye-top" cx="30" cy="30" r="10" fill="currentColor" />
-                                <circle class="eye-bot" cx="30" cy="70" r="10" fill="currentColor" />
-                                <path d="M 65 15 Q 95 50 65 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none" />
-                            </svg>
-                        </div>
+                <div class="hero-line1-wrapper" aria-hidden="true">
+                    <div class="hero-line1">
+                        AIRAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                     </div>
                 </div>
-                <div class="hero-buttons">
-                    <a href="#kaz-who" class="btn">Who is Kaz?</a>
-                    <a href="#gallery" class="btn">Gallery</a>
+                <div class="hero-line2-wrapper" aria-hidden="true">
+                    <div class="hero-line2">
+                        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ
+                        <!-- The Better Wink -->
+                        <svg id="smiley-svg" viewBox="0 0 100 100">
+                            <circle class="eye-top" cx="30" cy="30" r="10" fill="currentColor" />
+                            <circle class="eye-bot" cx="30" cy="70" r="10" fill="currentColor" />
+                            <path d="M 65 15 Q 95 50 65 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none" />
+                        </svg>
+                    </div>
                 </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#kaz-who" class="btn">Who is Kaz?</a>
+                <a href="#gallery" class="btn">Gallery</a>
+            </div>
+            </div>
             </section>
 
             <!-- Kaz Who Section -->

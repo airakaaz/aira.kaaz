@@ -55,6 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Menu Dropdown Logic & Easter Egg ---
     const logoBtn = document.getElementById("logo-btn");
     const menuDropdown = document.getElementById("menu-dropdown");
+    const backToTopItem = document.getElementById("back-to-top-item");
+
+    function updateBackToTop() {
+        backToTopItem.hidden = window.scrollY < 40;
+    }
+    updateBackToTop();
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
 
     let openCount = parseInt(localStorage.getItem("menu_opens") || "0", 10);
     if (!localStorage.getItem("menu_target")) {
@@ -119,8 +126,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- Gallery & Infinite Carousel Loading ---
+    setupHeroVisualCompression();
     initGallery();
 });
+
+function setupHeroVisualCompression() {
+    const content = document.querySelector(".hero-content");
+    if (
+        !content ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+        return;
+
+    let frameRequested = false;
+
+    function updateHeroVisualCompression() {
+        const compressionRange = window.innerHeight;
+        const progress = Math.min(
+            1,
+            Math.max(0, window.scrollY / compressionRange),
+        );
+        const shift = window.innerHeight * 0.5 * progress;
+        content.style.transform = `translateY(${-shift}px)`;
+        frameRequested = false;
+    }
+
+    function requestHeroUpdate() {
+        if (frameRequested) return;
+        frameRequested = true;
+        requestAnimationFrame(updateHeroVisualCompression);
+    }
+
+    updateHeroVisualCompression();
+    window.addEventListener("scroll", requestHeroUpdate, { passive: true });
+    window.addEventListener("resize", requestHeroUpdate);
+}
 
 async function initGallery() {
     const carousel = document.querySelector(".carousel-container");
@@ -149,9 +189,11 @@ async function initGallery() {
     imageFiles.forEach((file) => {
         const img = document.createElement("img");
         img.className = "gallery-img";
-        img.src = `gallery/${file}`;
-        img.alt = file.split(".")[0];
+        img.dataset.file = file;
+        img.src = `gallery/${encodeURIComponent(file)}`;
+        img.alt = file.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
         img.loading = "lazy";
+        img.tabIndex = 0;
         group.appendChild(img);
     });
 
@@ -161,10 +203,12 @@ async function initGallery() {
     // Clone twice for true mathematical infinite scrolling in both directions
     const clone1 = group.cloneNode(true);
     clone1.setAttribute("aria-hidden", "true");
+    clone1.querySelectorAll("img").forEach((img) => (img.tabIndex = -1));
     track.appendChild(clone1);
 
     const clone2 = group.cloneNode(true);
     clone2.setAttribute("aria-hidden", "true");
+    clone2.querySelectorAll("img").forEach((img) => (img.tabIndex = -1));
     track.appendChild(clone2);
 
     // 2. Setup Infinite Scroll & Auto-Scroll
@@ -262,19 +306,27 @@ async function initGallery() {
     let currentImgIdx = 0;
 
     document.querySelectorAll("#carousel-track .gallery-img").forEach((img) => {
-        img.addEventListener("click", () => {
+        const activate = () => {
             if (isDraggingClick) return;
-            const file = img.getAttribute("src").replace("gallery/", "");
+            const file = img.dataset.file;
             const realIdx = imageFiles.indexOf(file);
             if (realIdx !== -1) {
                 openLightbox(realIdx);
+            }
+        };
+        img.addEventListener("click", activate);
+        img.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                activate();
             }
         });
     });
 
     function openLightbox(idx) {
         currentImgIdx = idx;
-        lbImg.src = `gallery/${imageFiles[idx]}`;
+        lbImg.src = `gallery/${encodeURIComponent(imageFiles[idx])}`;
+        lbImg.alt = imageFiles[idx].replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
         lightbox.hidden = false;
         document.body.style.overflow = "hidden";
         preloadAdjacent(idx);
@@ -295,15 +347,18 @@ async function initGallery() {
     function navigateLb(dir) {
         currentImgIdx =
             (currentImgIdx + dir + imageFiles.length) % imageFiles.length;
-        lbImg.src = `gallery/${imageFiles[currentImgIdx]}`;
+        lbImg.src = `gallery/${encodeURIComponent(imageFiles[currentImgIdx])}`;
+        lbImg.alt = imageFiles[currentImgIdx]
+            .replace(/\.[^.]+$/, "")
+            .replace(/[_-]+/g, " ");
         preloadAdjacent(currentImgIdx);
     }
 
     function preloadAdjacent(idx) {
         const prev = (idx - 1 + imageFiles.length) % imageFiles.length;
         const next = (idx + 1) % imageFiles.length;
-        new Image().src = `gallery/${imageFiles[prev]}`;
-        new Image().src = `gallery/${imageFiles[next]}`;
+        new Image().src = `gallery/${encodeURIComponent(imageFiles[prev])}`;
+        new Image().src = `gallery/${encodeURIComponent(imageFiles[next])}`;
     }
 
     document.addEventListener("keydown", (e) => {
