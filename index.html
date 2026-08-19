@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>airakaaz</title>
+        <meta name="description" content="Aira's personal corner of the internet." />
+
+        <!-- Favicon -->
+        <link rel="icon" href="kaz.svg" type="image/svg+xml" />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Doto:wght@400;700&family=Roboto+Mono:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- Prevent FOUC for theme (Best kept inline in head) -->
+        <script>
+            (function () {
+                try {
+                    var theme = localStorage.getItem("theme");
+                    if (
+                        theme === "dark" ||
+                        (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+                    ) {
+                        document.documentElement.setAttribute("data-theme", "dark");
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- Main Script -->
+        <script src="script.js" defer></script>
+    </head>
+    <body id="top">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button
+                    id="logo-btn"
+                    aria-label="Toggle Menu"
+                    aria-expanded="false"
+                    class="logo-btn"
+                >
+                    <img src="kaz.svg" alt="Aira Logo" class="logo-img" />
+                </button>
+
+                <!-- Menu Dropdown -->
+                <div id="menu-dropdown" class="menu-dropdown" hidden>
+                    <div id="menu-list-normal">
+                        <button id="theme-toggle" class="menu-item">
+                            <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                            <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                            <span id="theme-text">my eyes hurt</span>
+                        </button>
+                        <hr class="menu-divider" />
+                        <a href="mailto:kizo.aria@protonmail.com" class="menu-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            contact kaz
+                        </a>
+                        <hr class="menu-divider" />
+                        <a href="#top" class="menu-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"></line>
+                                <polyline points="5,12 12,5 19,12"></polyline>
+                            </svg>
+                            back to top
+                        </a>
+                        <a href="#kaz-who" class="menu-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            kaz who?
+                        </a>
+                        <a href="#gallery" class="menu-item nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            gallery
+                        </a>
+                    </div>
+                    <div id="menu-list-egg" class="menu-egg" hidden>
+                        this is not a fridge dude
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-center">aira.kaaz</div>
+            <div class="header-right">
+                <a href="prove-it.html" class="chip">I am Kaz</a>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-title-container" aria-label="AIRAKAAZ :)">
+                    <div class="hero-line1-wrapper" aria-hidden="true">
+                        <div class="hero-line1">
+                            AIRAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                        </div>
+                    </div>
+                    <div class="hero-line2-wrapper" aria-hidden="true">
+                        <div class="hero-line2">
+                            AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ
+                            <!-- The Better Wink -->
+                            <svg id="smiley-svg" viewBox="0 0 100 100">
+                                <circle class="eye-top" cx="30" cy="30" r="10" fill="currentColor" />
+                                <circle class="eye-bot" cx="30" cy="70" r="10" fill="currentColor" />
+                                <path d="M 65 15 Q 95 50 65 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#kaz-who" class="btn">Who is Kaz?</a>
+                    <a href="#gallery" class="btn">Gallery</a>
+                </div>
+            </section>
+
+            <!-- Kaz Who Section -->
+            <section id="kaz-who" class="section-container kaz-who">
+                <div class="section-header">
+                    <h2>kaz who?</h2>
+                    <a href="https://github.com/airakaaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div>
+                    <p>i'm kaz, kaz is me, i study engineering, spend way too much time on linux, and occasionally remember to go outside with a camera.</p>
+                    <p>i like figuring out how things work, taking them apart, putting them back together, then wondering why i touched them in the first place.</p>
+                    <p>this website exists mostly because i thought it'd be fun to make.</p>
+                    <p>if you stick around long enough, you'll probably find a few dumb jokes, some photos i'm proud of, and evidence that i have absolutely no idea when to stop tweaking things.</p>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery" class="gallery-section">
+                <div class="section-container" style="padding-bottom: 2rem">
+                    <div class="section-header">
+                        <h2>i shot this btw</h2>
+                        <a href="https://instagram.com/kizo_aria" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="carousel-container" aria-label="Gallery Carousel" tabindex="0">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                made by kaz, for the love of the game.
+            </footer>
+        </main>
+
+        <!-- LIGHTBOX -->
+        <div id="lightbox" class="lightbox" hidden>
+            <button id="lightbox-close" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img id="lightbox-img" src="" alt="Enlarged gallery photo" />
+        </div>
+    </body>
+</html>

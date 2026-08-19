@@ -1,0 +1,140 @@
+:root {
+    /* Light Theme */
+    --bg: #ffffff;
+    --fg: #000000;
+    --text-sec: #555555;
+    --border: #e5e5e5;
+    --accent: #E60023; /* Vibrant Crimson */
+    
+    /* Typography */
+    --font-ui: 'Roboto Mono', monospace;
+    --font-heavy: 'Archivo Black', sans-serif;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --bg: #0a0a0a;
+    --fg: #ffffff;
+    --text-sec: #aaaaaa;
+    --border: #333333;
+    --accent: #FF2A3D;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: var(--font-ui);
+    color: var(--fg);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection { 
+    background-color: var(--accent); 
+    color: #ffffff; 
+}
+
+.huge-title {
+    font-family: var(--font-heavy);
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.04em;
+}
+
+#prove-it-form {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--fg);
+    max-width: 400px;
+    width: 100%;
+    margin: 1rem 0;
+    position: relative;
+}
+
+#prove-it-form input {
+    background: transparent;
+    border: none;
+    color: var(--fg);
+    font-size: 1.5rem;
+    font-family: var(--font-ui);
+    padding: 0.5rem 0;
+    flex: 1;
+    outline: none;
+    width: 100%;
+}
+
+#prove-it-form input::placeholder { 
+    color: var(--text-sec); 
+}
+
+#prove-it-form button {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+}
+
+#prove-it-form button:hover { 
+    transform: translateX(4px); 
+}
+
+.message-box {
+    font-size: 1rem;
+    color: var(--text-sec);
+    min-height: 1.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.2s ease;
+}
+
+/* The "Louder" Easter Egg State */
+.message-box.loud {
+    font-family: var(--font-heavy);
+    font-size: 3rem;
+    letter-spacing: -0.04em;
+    animation: pulse 1s infinite alternate;
+    color: #50C878; /* Emerald Green */
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.02); }
+}
+
+.nvm-btn {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-sec);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    margin-top: 1rem;
+}
+
+.nvm-btn:hover, 
+.nvm-btn:focus-visible {
+    color: var(--fg);
+    border-color: var(--fg);
+    outline: none;
+}
